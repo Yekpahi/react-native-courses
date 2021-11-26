@@ -1,49 +1,42 @@
 import React from 'react';
-import { useWindowDimensions } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import ScreenA from './ScreenA';
-import ScreenB from './ScreenB';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Home from './screens/Home';
+import Login from './screens/Login';
 
-const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
-const App = () => {
-
-  const dimensions = useWindowDimensions();
-  const isLargeScreen = dimensions.width >= 768;
+function App() {
   return (
     <NavigationContainer>
-    <Drawer.Navigator
-    initialRouteName="Screen_A"
-    drawerPosition='left'
-    drawerType="front"
-    edgeWidth={50}
-    hideStatusBar={false}
-    overlayColor='#00000090'
-    drawerStyle={{
-      backgroundColor: 'red',
-      width: 150
-    }}
-    screenOptions={{
-      headerShown: false,
-      swipeEnabled: true,
-      gestureEnabled: true,
-      headerTitleAlign: 'center',
-      headerStyle: {
-        backgroundColor: '#0080ff'
-      },
-      headerTintColor: '#ffffff',
-      headerTitleStyle: {
-        fontSize: 25,
-        fontWeight: 'bold'
-      }
-    }}
-    >
-      <Drawer.Screen name="Screen_A" component={ScreenA} />
-      <Drawer.Screen name="Screen_B" component={ScreenB} />
-    </Drawer.Navigator>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#0080ff'
+          },
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontSize: 25,
+            fontWeight: 'bold'
+          }
+        }}
+      >
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
 
 export default App;
